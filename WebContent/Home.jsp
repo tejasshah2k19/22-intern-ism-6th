@@ -9,9 +9,9 @@
 <body>
 
 	<%
-		String firstName = (String) request.getAttribute("firstName");
-		String email = (String) request.getAttribute("email");
-		String gender = (String) request.getAttribute("gender");
+		String firstName = (String) request.getAttribute("firstNameValue");
+		String email = (String) request.getAttribute("emailValue");
+		String gender = (String) request.getAttribute("genderValue");
 	%>
 
 
