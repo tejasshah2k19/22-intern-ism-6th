@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bean.UserBean;
+import com.dao.UserDao;
+
 @WebServlet("/SignupController")
 public class SignupController extends HttpServlet {
 
@@ -52,6 +55,20 @@ public class SignupController extends HttpServlet {
 			rd = request.getRequestDispatcher("Signup.jsp");
 
 		} else {
+			
+			UserDao userDao = new UserDao();
+			
+			UserBean userBean = new UserBean();
+			
+			userBean.setFirstName(firstName);
+			userBean.setLastName(lastName);
+			userBean.setEmail(email);
+			userBean.setPassword(password);
+			userBean.setGender(gender);
+			
+			
+			userDao.insertUser(userBean);
+			
 			// goahead
 			// goto home.jsp
 			rd = request.getRequestDispatcher("Home.jsp");
