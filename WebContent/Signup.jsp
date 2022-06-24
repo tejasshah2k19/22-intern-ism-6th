@@ -36,9 +36,7 @@
 		 Male <input type="radio" name="gender" value="male"   <%=genderValue!=null&&genderValue.equals("male")?"checked":"" %> />
 		
 		
-		
 		Female:<input type="radio" name="gender" value="female" <%=genderValue!=null&&genderValue.equals("female")?"checked":"" %>/> 
-		
 		
 		
 		<span

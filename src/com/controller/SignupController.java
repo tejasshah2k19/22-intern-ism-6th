@@ -71,7 +71,8 @@ public class SignupController extends HttpServlet {
 			
 			// goahead
 			// goto home.jsp
-			rd = request.getRequestDispatcher("Home.jsp");
+			request.setAttribute("msg", "Signup done...");
+			rd = request.getRequestDispatcher("Login.jsp");
 
 		}
 		rd.forward(request, response);
