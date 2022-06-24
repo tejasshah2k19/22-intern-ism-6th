@@ -10,7 +10,32 @@ import com.util.DbConnection;
 
 public class UserDao {
 
-	
+	public UserBean login(String email, String password) {
+		UserBean user = null;
+		try {
+			Connection con = DbConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("select * from users where email = ? and password = ? ");
+			pstmt.setString(1, email);
+			pstmt.setString(2, password);
+
+			// read select
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				user = new UserBean();
+				user.setUserId(rs.getInt("userid"));
+				user.setFirstName(rs.getString("firstname"));
+				user.setUserType(rs.getString("usertype"));
+				//
+
+			}
+
+		} catch (Exception e) {
+			System.out.println("SMW in login Dao ");
+			e.printStackTrace();
+		}
+
+		return user;
+	}
 
 	public void insertUser(UserBean userBean) {
 
@@ -18,13 +43,14 @@ public class UserDao {
 			Connection con = DbConnection.getConnection();
 
 			PreparedStatement pstmt = con.prepareStatement(
-					"insert into users (firstname,lastname,email,password,gender) values (?,?,?,?,?)");
+					"insert into users (firstname,lastname,email,password,gender,usertype) values (?,?,?,?,?,?)");
 
 			pstmt.setString(1, userBean.getFirstName());
 			pstmt.setString(2, userBean.getLastName());
 			pstmt.setString(3, userBean.getEmail());
 			pstmt.setString(4, userBean.getPassword());
 			pstmt.setString(5, userBean.getGender());
+			pstmt.setString(6, userBean.getUserType());
 
 			// insert update delete
 			int records = pstmt.executeUpdate();

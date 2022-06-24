@@ -65,6 +65,7 @@ public class SignupController extends HttpServlet {
 			userBean.setEmail(email);
 			userBean.setPassword(password);
 			userBean.setGender(gender);
+			userBean.setUserType("customer");
 			
 			
 			userDao.insertUser(userBean);
