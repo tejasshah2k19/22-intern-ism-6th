@@ -7,22 +7,8 @@
 <title>Home</title>
 </head>
 <body>
+<jsp:include page="UserMenu.jsp"></jsp:include>
 
-	<%
-		String firstName = (String) request.getAttribute("firstNameValue");
-		String email = (String) request.getAttribute("emailValue");
-		String gender = (String) request.getAttribute("genderValue");
-	%>
-
-
-
-	FirstName :
-	<%=firstName%>
-	<br> Email :
-	<%=email%>
-	<br> Gender :
-	<%=gender%>
-	<br>
 
 </body>
 </html>
