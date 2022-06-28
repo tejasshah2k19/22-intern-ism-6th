@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bean.UserBean;
 import com.dao.UserDao;
@@ -31,6 +32,9 @@ public class LoginController extends HttpServlet {
 			rd = request.getRequestDispatcher("Login.jsp");
 
 		} else {
+
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", user.getUserId());
 			if (user.getUserType().equals("customer")) {
 				rd = request.getRequestDispatcher("Home.jsp");
 			} else if (user.getUserType().equals("admin")) {

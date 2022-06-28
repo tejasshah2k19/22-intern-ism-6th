@@ -287,7 +287,7 @@ footer {
 								quis rerum. Asperiores accusamus harum ducimus velit odit ut.
 								Saepe, iste optio laudantium sed aliquam sequi.</h5>
 							<div class="text-center my-4">
-								<a href="#" class="btn btn-warning">Check offer</a>
+								<a href="AddToCartController?productId=${it.productId}" class="btn btn-warning">Add To Cart</a>
 							</div>
 						</div>
 					</div>
