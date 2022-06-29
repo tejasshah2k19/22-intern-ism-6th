@@ -5,7 +5,7 @@ public class CartBean {
 	int cartId;
 	int userId;
 	int productId;
-
+	
 	public int getCartId() {
 		return cartId;
 	}
