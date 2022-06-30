@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.bean.CartBean;
 import com.bean.CartProductBean;
+import com.bean.OrderDetailBean;
 import com.util.DbConnection;
 
 public class OrderDao {
@@ -42,11 +42,17 @@ public class OrderDao {
 			int orderId = rs.getInt("orderid");
 			System.out.println("orderid ==> " + orderId);
 
-
+			OrderDetailDao orderDetailDao = new OrderDetailDao();
 			// orderdetail -> 7 10 [11 22 33 44 55 ]
-			
-			
-			
+			for (CartProductBean cartProductBean : carts) {
+				OrderDetailBean orderDetail = new OrderDetailBean();
+				orderDetail.setProductId(cartProductBean.getProductId());
+				orderDetail.setPrice(cartProductBean.getPrice());
+				orderDetail.setOrderId(orderId);
+				orderDetailDao.addOrderDetail(orderDetail);
+
+			}
+
 			// remove all items from cart
 
 		} catch (Exception e) {
