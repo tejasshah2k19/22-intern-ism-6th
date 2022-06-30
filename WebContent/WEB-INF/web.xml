@@ -59,4 +59,24 @@
     <servlet-name>CheckoutController</servlet-name>
     <url-pattern>/CheckoutController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyOrdersController</display-name>
+    <servlet-name>MyOrdersController</servlet-name>
+    <servlet-class>com.controller.MyOrdersController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyOrdersController</servlet-name>
+    <url-pattern>/MyOrdersController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyOrderDetailController</display-name>
+    <servlet-name>MyOrderDetailController</servlet-name>
+    <servlet-class>com.controller.MyOrderDetailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyOrderDetailController</servlet-name>
+    <url-pattern>/MyOrderDetailController</url-pattern>
+  </servlet-mapping>
 </web-app>

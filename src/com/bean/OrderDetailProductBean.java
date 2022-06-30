@@ -1,11 +1,13 @@
 package com.bean;
 
-public class OrderDetailBean {
+public class OrderDetailProductBean {
 
-	int orderDetailId;
-	int orderId;
-	int productId;
-	int price;
+	private int orderDetailId;
+	private int orderId;
+	private int productId;
+	private String name;
+	private int price;
+	private String imgUrl;
 
 	public int getOrderDetailId() {
 		return orderDetailId;
@@ -31,12 +33,28 @@ public class OrderDetailBean {
 		this.productId = productId;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getPrice() {
 		return price;
 	}
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 }

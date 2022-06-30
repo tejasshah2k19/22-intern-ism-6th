@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.bean.CartProductBean;
+import com.bean.OrderBean;
 import com.bean.OrderDetailBean;
 import com.util.DbConnection;
 
@@ -54,11 +55,42 @@ public class OrderDao {
 			}
 
 			// remove all items from cart
+			cartDao.emptyCart(carts.get(0).getUserId());
 
 		} catch (Exception e) {
 			System.out.println("SMW in OrderDao::placeOrder() ");
 			e.printStackTrace();
 		}
 
+	}
+
+	public ArrayList<OrderBean> getMyOrders(int userId) {
+		ArrayList<OrderBean> orders = new ArrayList<OrderBean>();
+		try {
+			Connection con = DbConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("select * from orders where userid = ? ");
+			pstmt.setInt(1, userId);
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				OrderBean order = new OrderBean();
+				
+				order.setAmount(rs.getInt("amount"));
+				order.setOrderId(rs.getInt("orderid"));
+				order.setOrderStatus(rs.getString("orderstatus"));
+				order.setPaymentMode(rs.getString("paymentmode"));
+				order.setPaymentStatus(rs.getString("paymentstatus"));
+				order.setUserId(rs.getInt("userid"));
+				orders.add(order);
+			}
+			
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println("SMW :: OrderDao::getMyOrders()");
+			e.printStackTrace();
+		}
+		return orders;
 	}
 }

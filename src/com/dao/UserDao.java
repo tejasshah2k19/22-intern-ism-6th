@@ -3,6 +3,7 @@ package com.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.bean.UserBean;
@@ -38,9 +39,9 @@ public class UserDao {
 	}
 
 	public void insertUser(UserBean userBean) {
-
+		Connection con = null;
 		try {
-			Connection con = DbConnection.getConnection();
+			con = DbConnection.getConnection();
 
 			PreparedStatement pstmt = con.prepareStatement(
 					"insert into users (firstname,lastname,email,password,gender,usertype) values (?,?,?,?,?,?)");
@@ -59,17 +60,23 @@ public class UserDao {
 		} catch (Exception e) {
 			System.out.println("SMW in insertUser() ");
 			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
 
 	public ArrayList<UserBean> getAllUsers() {
 		ArrayList<UserBean> users = new ArrayList<UserBean>();
-		try {
-			Connection con = DbConnection.getConnection();
-			PreparedStatement pstmt = con.prepareStatement("select * from users");
+		try (Connection con = DbConnection.getConnection();
+				PreparedStatement pstmt = con.prepareStatement("select * from users");
+				ResultSet rs = pstmt.executeQuery();// select readonly ==>query
 
-			ResultSet rs = pstmt.executeQuery();// select readonly ==>query
+		) {
 
 			while (rs.next() == true) { // 1st row 2nd row
 				int userId = rs.getInt("userid");// db column name

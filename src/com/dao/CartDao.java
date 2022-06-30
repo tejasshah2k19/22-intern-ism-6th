@@ -52,4 +52,15 @@ public class CartDao {
 		return carts;
 	}
 
+	public void emptyCart(int userId) {
+		try {
+			Connection con = DbConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("delete from carts where userid = ? ");
+			pstmt.setInt(1, userId);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("SMW CartDao::emptyCart()");
+			e.printStackTrace();
+		}
+	}
 }

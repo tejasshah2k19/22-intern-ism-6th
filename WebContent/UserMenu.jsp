@@ -20,7 +20,7 @@
 				href="Home.jsp">Home <span class="sr-only">(current)</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="ListUserController">List Orders</a></li>
+				href="MyOrdersController">List Orders</a></li>
 <li class="nav-item"><a class="nav-link"
 				href="ListProductController">Products</a></li>
 

@@ -25,7 +25,7 @@ public class CheckoutController extends HttpServlet {
 		// order detail 
 		
 		// home -> order success 
-		
+		response.sendRedirect("OrderSuccessPlace.jsp");
 	
 	}
 

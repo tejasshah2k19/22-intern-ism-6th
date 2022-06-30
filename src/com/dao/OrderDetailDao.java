@@ -2,8 +2,11 @@ package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import com.bean.OrderDetailBean;
+import com.bean.OrderDetailProductBean;
 import com.util.DbConnection;
 
 public class OrderDetailDao {
@@ -19,8 +22,34 @@ public class OrderDetailDao {
 
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			System.out.println("SMW OrderDetailDao :: OrderDetailBean");
+			System.out.println("SMW OrderDetailDao :: addOrderDetail()");
 			e.printStackTrace();
 		}
+	}
+
+	public ArrayList<OrderDetailProductBean> getOrderDetails(int orderId) {
+		ArrayList<OrderDetailProductBean> details = new ArrayList<OrderDetailProductBean>();
+		try {
+			Connection con = DbConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(
+					"select p.imgurl,p.name,od.orderdetailid,od.orderid,od.price,p.productid from orderdetails od , products p where p.productid = od.productid and od.orderid = ? ");
+			pstmt.setInt(1, orderId);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				OrderDetailProductBean bean = new OrderDetailProductBean();
+				bean.setImgUrl(rs.getString("imgurl"));
+				bean.setName(rs.getString("name"));
+				bean.setOrderDetailId(rs.getInt("orderdetailid"));
+				bean.setOrderId(rs.getInt("orderid"));
+				bean.setPrice(rs.getInt("price"));
+				bean.setProductId(rs.getInt("productid"));
+
+				details.add(bean);
+			}
+		} catch (Exception e) {
+			System.out.println("SMW OrderDetailDao :: getOrderDetails()");
+			e.printStackTrace();
+		}
+		return details;
 	}
 }
